@@ -1,4 +1,11 @@
-
+/**
+ * @file Waveforms.cpp
+ * @author Tom Clayton
+ * @brief Waveform classes used by BandLimitedOsc class
+ * @version 0.1
+ * @date 2022-10-31
+ * 
+ */
 #include "Waveforms.hpp"
 
 Waveform::Waveform(float *arg_wavetable, table_step_t arg_table_size)

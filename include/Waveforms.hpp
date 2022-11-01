@@ -1,4 +1,11 @@
-
+/**
+ * @file Waveforms.hpp
+ * @author Tom Clayton
+ * @brief Waveform classes used by BandLimitedOsc class
+ * @version 0.1
+ * @date 2022-10-31
+ * 
+ */
 #include <cstdint>
 
 typedef uint16_t harmonic_t;

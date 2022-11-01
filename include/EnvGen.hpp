@@ -1,7 +1,11 @@
-/*
-    EnvGen.cpp - An ADSR Envelope Generator.
-    2022 - Tom Clayton
-*/
+/**
+ * @file EnvGen.hpp
+ * @author Tom Clayton
+ * @brief An exponential ADSR Envelope Generator.
+ * @version 0.1
+ * @date 2022-10-31
+ *
+ */
 
 #include <cstdint>
 #include <cmath>
@@ -26,12 +30,40 @@ private:
     State state;
 
 public:
+    /**
+     * @brief Construct a new Env Gen object
+     * 
+     * @param sample_rate 
+     */
     EnvGen(uint32_t sample_rate);
+
+    /**
+     * @brief Destroy the Env Gen object
+     * 
+     */
     ~EnvGen() {}
 
+    /**
+     * @brief Start from zero in the attack phase. 
+     * 
+     */
     void trigger();
+
+    /**
+     * @brief Move to the release phase.
+     * 
+     */
     void gate_release();
 
+    /**
+     * @brief Advance forward one time division and return the output sample.
+     * 
+     * @param attack 
+     * @param decay 
+     * @param sustain 
+     * @param release 
+     * @return sample 
+     */
     float advance(
         float attack,
         float decay,

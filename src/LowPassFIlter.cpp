@@ -1,9 +1,13 @@
-/*
-    LowPassFilter.cpp - A 2nd order low pass
-    filter with cut-off and resonance controls.
-    2022 - Tom Clayton
-*/
-
+/**
+ * @file LowPassFilter.cpp
+ * @author Tom Clayton
+ * @brief A 2nd order low pass filter with cut-off and 
+ *        resonance controls.
+ * 
+ * @version 0.1
+ * @date 2022-10-31
+ * 
+ */
 #include "LowPassFilter.hpp"
 
 LowPassFilter::LowPassFilter(uint32_t sample_rate)

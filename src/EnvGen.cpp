@@ -1,7 +1,11 @@
-/*
-    EnvGen.cpp - An ADSR Envelope Generator.
-    2022 - Tom Clayton
-*/
+/**
+ * @file EnvGen.cpp
+ * @author Tom Clayton
+ * @brief An exponential ADSR Envelope Generator.
+ * @version 0.1
+ * @date 2022-10-31
+ *
+ */
 
 #include "EnvGen.hpp"
     

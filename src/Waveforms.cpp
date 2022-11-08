@@ -5,10 +5,12 @@
  * @version 0.1
  * @date 2022-10-31
  * 
+ * GNU GENERAL PUBLIC LICENSE Version 3
  */
-#include "Waveforms.hpp"
 
-Waveform::Waveform(float *arg_wavetable, table_step_t arg_table_size)
+#include "waveforms.hpp"
+
+Waveform::Waveform(audio_sample_t *arg_wavetable, table_step_t arg_table_size)
     :wavetable(arg_wavetable),
      table_size(arg_table_size),
      master_position(0),
@@ -31,9 +33,9 @@ void Waveform::create_arrays()
     table_positions = new table_step_t[n_harmonics];
 }
 
-float Waveform::calculate_sample(table_step_t new_master_position, table_step_t step_size)
+audio_sample_t Waveform::calculate_sample(table_step_t new_master_position, table_step_t step_size)
 {
-    float sample = 0.0f;
+    audio_sample_t sample = 0.0f;
 
     // If master position isn't where expected, restart from new master position.
     if (new_master_position != master_position + step_size + phase_offset){
@@ -54,7 +56,7 @@ float Waveform::calculate_sample(table_step_t new_master_position, table_step_t 
     return sample;
 }
 
-Triangle::Triangle(float *arg_wavetable, table_step_t arg_table_size, harmonic_t max_harmonic) 
+Triangle::Triangle(audio_sample_t *arg_wavetable, table_step_t arg_table_size, harmonic_t max_harmonic) 
         : Waveform(arg_wavetable, arg_table_size)
 {
     n_harmonics = max_harmonic / 2;
@@ -82,7 +84,7 @@ void Triangle::create_harmonics()
     }
 }
 
-Sawtooth::Sawtooth(float *arg_wavetable, table_step_t arg_table_size, harmonic_t max_harmonic) 
+Sawtooth::Sawtooth(audio_sample_t *arg_wavetable, table_step_t arg_table_size, harmonic_t max_harmonic) 
         : Waveform(arg_wavetable, arg_table_size)
 {
     n_harmonics = max_harmonic;
@@ -111,7 +113,7 @@ void Sawtooth::create_harmonics()
     }
 }
 
-Square::Square(float *arg_wavetable, table_step_t arg_table_size, harmonic_t max_harmonic) 
+Square::Square(audio_sample_t *arg_wavetable, table_step_t arg_table_size, harmonic_t max_harmonic) 
         : Waveform(arg_wavetable, arg_table_size)
 {
     n_harmonics = max_harmonic / 2;
@@ -141,7 +143,7 @@ void Square::create_harmonics()
     }
 }
 
-Sine::Sine(float *arg_wavetable, table_step_t arg_table_size) 
+Sine::Sine(audio_sample_t *arg_wavetable, table_step_t arg_table_size) 
         : Waveform(arg_wavetable, arg_table_size)
 {
     n_harmonics = 1;

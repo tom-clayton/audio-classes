@@ -9,10 +9,10 @@
  * @version 0.1
  * @date 2022-10-25
  * 
- * 
+ * GNU GENERAL PUBLIC LICENSE Version 3
  */
 
-#include "BandLimitedOsc.hpp"
+#include "bandlimitedosc.hpp"
 /**
  * @brief Set initial values, create wavetable and waveform objects
  * 
@@ -62,7 +62,7 @@ void BandLimitedOsc::create_wavetable()
  * 
  * @param frequency 
  */
-void BandLimitedOsc::advance(float frequency)
+void BandLimitedOsc::advance(frequency_t frequency)
 {
     step_size = (table_step_t)(size_ovr_srate * frequency);
     table_position += step_size;
@@ -72,9 +72,9 @@ void BandLimitedOsc::advance(float frequency)
 /**
  * @brief Acquire the next sample from the triangle waveform object
  * 
- * @return float - triangle sample 
+ * @return audio_sample_t sample 
  */
-float BandLimitedOsc::triangle_sample()
+audio_sample_t BandLimitedOsc::triangle_sample()
 {
     return triangle->calculate_sample(table_position, step_size);
 }
@@ -82,9 +82,9 @@ float BandLimitedOsc::triangle_sample()
 /**
  * @brief Acquire the next sample from the sawtooth waveform object
  * 
- * @return float - sawtooth sample 
+ * @return audio_sample_t sample 
  */
-float BandLimitedOsc::sawtooth_sample()
+audio_sample_t BandLimitedOsc::sawtooth_sample()
 {
     return sawtooth->calculate_sample(table_position, step_size);
 }
@@ -92,9 +92,9 @@ float BandLimitedOsc::sawtooth_sample()
 /**
  * @brief Acquire the next sample from the square waveform object
  * 
- * @return float - square sample 
+ * @return audio_sample_t sample 
  */
-float BandLimitedOsc::square_sample()
+audio_sample_t BandLimitedOsc::square_sample()
 {
     return square->calculate_sample(table_position, step_size);
 }
@@ -102,9 +102,9 @@ float BandLimitedOsc::square_sample()
 /**
  * @brief Acquire the next sample from the sine waveform object
  * 
- * @return float - sine sample 
+ * @return audio_sample_t sample 
  */
-float BandLimitedOsc::sine_sample()
+audio_sample_t BandLimitedOsc::sine_sample()
 {
     return sine->calculate_sample(table_position, step_size);
 }

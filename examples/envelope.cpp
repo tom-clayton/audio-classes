@@ -2,6 +2,7 @@
    Command-line envelope example 
    creates text file to test EnvGen class
    Tom Clayton 2022
+   GNU GENERAL PUBLIC LICENSE Version 3
 */
 
 #include <cstdint>

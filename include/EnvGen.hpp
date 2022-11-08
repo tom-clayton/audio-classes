@@ -5,10 +5,15 @@
  * @version 0.1
  * @date 2022-10-31
  *
+ * GNU GENERAL PUBLIC LICENSE Version 3 
  */
+
+#pragma once
 
 #include <cstdint>
 #include <cmath>
+
+#include "sampletypes.hpp"
 
 #define LEVEL 1.0f
 #define THRESHOLD 0.001f
@@ -25,8 +30,8 @@ typedef enum {
 class EnvGen
 {
 private:
-    float sample_time;
-    float output;
+    control_sample_t sample_time;
+    control_sample_t output;
     State state;
 
 public:
@@ -62,12 +67,12 @@ public:
      * @param decay 
      * @param sustain 
      * @param release 
-     * @return sample 
+     * @return control_sample_t - sample 
      */
-    float advance(
-        float attack,
-        float decay,
-        float sustain,
-        float release
+    control_sample_t advance(
+        delta_time_t attack,
+        delta_time_t decay,
+        delta_time_t sustain,
+        delta_time_t release
     );
 };

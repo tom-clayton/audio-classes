@@ -5,8 +5,14 @@
  * @version 0.1
  * @date 2022-10-31
  * 
+ * GNU GENERAL PUBLIC LICENSE Version 3
  */
+
+#pragma once
+
 #include <cstdint>
+
+#include "sampletypes.hpp"
 
 typedef uint16_t harmonic_t;
 typedef uint32_t table_step_t;
@@ -19,7 +25,7 @@ typedef float amplitude_t;
 class Waveform
 {
 private:
-    float *wavetable;
+    audio_sample_t *wavetable;
     table_step_t table_size;
     table_step_t master_position;
     table_step_t step_size;
@@ -50,7 +56,7 @@ public:
      * @param wavetable
      * @param table_size
      */
-    Waveform(float* wavetable, table_step_t table_size);
+    Waveform(audio_sample_t* wavetable, table_step_t table_size);
 
     /**
      * @brief Destroy the Waveform object.
@@ -63,9 +69,12 @@ public:
      * 
      * @param new_master_position 
      * @param step_size 
-     * @return sample  
+     * @return audio_sample_t sample  
      */
-    float calculate_sample(table_step_t new_master_position, table_step_t step_size);
+    audio_sample_t calculate_sample(
+                            table_step_t new_master_position, 
+                            table_step_t step_size
+                        );
 };
 
 /**
@@ -82,7 +91,11 @@ public:
      * @param table_size 
      * @param max_harmonic 
      */
-    Triangle(float* wavetable, table_step_t table_size, harmonic_t max_harmonic);
+    Triangle(
+        audio_sample_t* wavetable, 
+        table_step_t table_size, 
+        harmonic_t max_harmonic
+    );
     
     /**
      * @brief Destroy the Triangle object.
@@ -112,8 +125,12 @@ public:
      * @param table_size 
      * @param max_harmonic 
      */
-    Sawtooth(float* wavetable, table_step_t table_size, harmonic_t max_harmonic);
-    
+    Sawtooth(
+        audio_sample_t* wavetable, 
+        table_step_t table_size, 
+        harmonic_t max_harmonic
+    );
+
     /**
      * @brief Destroy the Sawtooth object.
      * 
@@ -142,8 +159,12 @@ public:
      * @param table_size 
      * @param max_harmonic 
      */
-    Square(float* wavetable, table_step_t table_size, harmonic_t max_harmonic);
-    
+    Square(
+        audio_sample_t* wavetable, 
+        table_step_t table_size, 
+        harmonic_t max_harmonic
+    );
+
     /**
      * @brief Destroy the Square object.
      * 
@@ -172,7 +193,7 @@ public:
      * @param table_size 
      * @param max_harmonic 
      */
-    Sine(float* wavetable, table_step_t table_size);
+    Sine(audio_sample_t* wavetable, table_step_t table_size);
     
     /**
      * @brief Destroy the Sine object.

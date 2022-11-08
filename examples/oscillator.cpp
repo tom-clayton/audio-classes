@@ -1,6 +1,7 @@
 /* oscillator.cpp 
    Command-line waveform generator example 
    Tom Clayton 2022
+   GNU GENERAL PUBLIC LICENSE Version 3
 */
 
 #include <cstdint>

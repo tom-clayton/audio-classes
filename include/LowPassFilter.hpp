@@ -7,28 +7,33 @@
  * @version 0.1
  * @date 2022-10-31
  * 
+ * GNU GENERAL PUBLIC LICENSE Version 3
  */
+
+#pragma once
 
 #include <cstdint>
 #include <cmath>
 
+#include "sampletypes.hpp"
+
 class LowPassFilter
 {
 private:
-    float twopi_ovr_srate;
-    float cutoff;
-    float qfactor;
+    filter_coef_t twopi_ovr_srate;
+    frequency_t cutoff;
+    control_sample_t qfactor;
 
-    float a0;
-    float a1;
-    float a2;
-    float b1;
-    float b2;
+    filter_coef_t a0;
+    filter_coef_t a1;
+    filter_coef_t a2;
+    filter_coef_t b1;
+    filter_coef_t b2;
 
-    float ff_z1;
-    float ff_z2;
-    float fb_z1;
-    float fb_z2;
+    audio_sample_t ff_z1;
+    audio_sample_t ff_z2;
+    audio_sample_t fb_z1;
+    audio_sample_t fb_z2;
 
     /**
      * @brief caluclate the filter's coefficients
@@ -57,7 +62,11 @@ public:
      * @param sample 
      * @param cutoff 
      * @param resonance 
-     * @return sample 
+     * @return audio_sample_t sample 
      */
-    float process_sample(float sample, float cutoff, float resonance);
+    audio_sample_t process_sample(
+        audio_sample_t sample, 
+        frequency_t cutoff, 
+        control_sample_t resonance
+    );
 };

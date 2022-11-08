@@ -7,8 +7,10 @@
  * @version 0.1
  * @date 2022-10-31
  * 
+ * GNU GENERAL PUBLIC LICENSE Version 3
  */
-#include "LowPassFilter.hpp"
+
+#include "lowpassfilter.hpp"
 
 LowPassFilter::LowPassFilter(uint32_t sample_rate)
     :ff_z1(0),
@@ -19,10 +21,10 @@ LowPassFilter::LowPassFilter(uint32_t sample_rate)
     twopi_ovr_srate = (2 * M_PI) / sample_rate;
 }
 
-float LowPassFilter::process_sample(
+audio_sample_t LowPassFilter::process_sample(
     float sample, 
-    float arg_cutoff, 
-    float arg_qfactor
+    frequency_t arg_cutoff, 
+    control_sample_t arg_qfactor
 )
 {
     if (cutoff != arg_cutoff || qfactor != arg_qfactor){
@@ -30,7 +32,7 @@ float LowPassFilter::process_sample(
         qfactor = arg_qfactor;
         calculate_coeffs();
     }
-    float output = (a0 * sample)\
+    audio_sample_t output = (a0 * sample)\
                     + (a1 * ff_z1)\
                     + (a2 * ff_z2)\
                     - (b1 * fb_z1)\
@@ -45,16 +47,16 @@ float LowPassFilter::process_sample(
 
 void LowPassFilter::calculate_coeffs()
 {
-    float theta = twopi_ovr_srate * cutoff;
-    float d;
+    filter_coef_t theta = twopi_ovr_srate * cutoff;
+    filter_coef_t d;
     if (qfactor){
         d = 1.0f / qfactor;
     } else {
         d = 1.0f / 0.00001f;
     }
-    float beta = 0.5f * (1.0f - ((d / 2.0f) * sin(theta)))\
+    filter_coef_t beta = 0.5f * (1.0f - ((d / 2.0f) * sin(theta)))\
                          / (1.0f + ((d/ 2.0f) * sin(theta)));
-    float gamma = (0.5f + beta) * cos(theta);
+    filter_coef_t gamma = (0.5f + beta) * cos(theta);
 
     a1 = 0.5f + beta - gamma;
     a0 = a2 = a1 / 2.0f;

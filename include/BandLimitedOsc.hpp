@@ -9,11 +9,15 @@
  * @version 0.1
  * @date 2022-10-25
  * 
- * 
+ * GNU GENERAL PUBLIC LICENSE Version 3
  */
+
+#pragma once
 
 #include <cstdint>
 #include <cmath>
+
+#include "sampletypes.hpp"
 #include "Waveforms.hpp"
 
 #define TABLE_SIZE      65536
@@ -31,8 +35,8 @@ private:
     table_step_t step_size;
     table_step_t table_position;
 
-    float wavetable[TABLE_SIZE];
-    float size_ovr_srate;
+    audio_sample_t wavetable[TABLE_SIZE];
+    audio_sample_t size_ovr_srate;
 
     Triangle *triangle;
     Sawtooth *sawtooth;
@@ -66,35 +70,35 @@ public:
      * 
      * @param frequency 
      */
-    void advance(float frequency);
+    void advance(frequency_t frequency);
 
     /**
      * @brief Calculate next triangle sample 
      * 
-     * @return float sample
+     * @return audio_sample_t sample
      */
-    float triangle_sample();
+    audio_sample_t triangle_sample();
 
     /**
      * @brief Calculate next sawtooth sample 
      * 
-     * @return float sample
+     * @return audio_sample_t sample
      */
-    float sawtooth_sample();
+    audio_sample_t sawtooth_sample();
     
     /**
      * @brief Calculate next square sample 
      * 
-     * @return float sample
+     * @return audio_sample_t sample
      */
-    float square_sample();
+    audio_sample_t square_sample();
     
     /**
      * @brief Calculate next sine sample 
      * 
-     * @return float sample
+     * @return audio_sample_t sample
      */
-    float sine_sample();
+    audio_sample_t sine_sample();
 };
 
 

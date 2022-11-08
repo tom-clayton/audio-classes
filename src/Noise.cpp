@@ -6,17 +6,17 @@
  * @version 0.1
  * @date 2022-11-03
  * 
- * 
+ * GNU GENERAL PUBLIC LICENSE Version 3
  */
 
-#include "Noise.hpp"
+#include "noise.hpp"
 
 Noise::Noise()
 {
     srand(time(0));
 }
 
-float Noise::get_sample()
+audio_sample_t Noise::get_sample()
 {
     return rand();
 }

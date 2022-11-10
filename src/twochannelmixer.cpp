@@ -1,26 +1,18 @@
 /**
  * @file twochannelmixer.cpp
  * @author Tom Clayton
- * @brief Two channel 'crossfader' style mixer where control signal
+ * @brief Two channel 'crossfader' style mixer function where control signal
  *        between -0.1 and 0.1 determines ratio of two signals.
+ *        Rise/fall is exponential.
  * @version 0.1
  * @date 2022-11-09
  * 
- * @copyright Copyright (c) 2022
- * 
+ * GNU GENERAL PUBLIC LICENSE Version 3
  */
 
 #include "twochannelmixer.hpp"
 
-TwoChannelMixer::TwoChannelMixer()
-{
-}
-
-TwoChannelMixer::~TwoChannelMixer()
-{
-}
-
-audio_sample_t TwoChannelMixer::get_sample(
+audio_sample_t mix(
     audio_sample_t input_a,
     audio_sample_t input_b,
     control_sample_t fader

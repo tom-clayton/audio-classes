@@ -6,8 +6,7 @@
  * @version 0.1
  * @date 2022-11-09
  * 
- * @copyright Copyright (c) 2022
- * 
+ * GNU GENERAL PUBLIC LICENSE Version 3
  */
 
 #include "multichannelmixer.hpp"

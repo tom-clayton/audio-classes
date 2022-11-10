@@ -28,7 +28,7 @@ void EnvGen::gate_release()
     state = STATE_RELEASE;
 }
 
-control_sample_t EnvGen::advance(
+control_sample_t EnvGen::get_sample(
     delta_time_t attack,
     delta_time_t decay,
     delta_time_t sustain,

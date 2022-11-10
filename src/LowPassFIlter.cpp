@@ -21,8 +21,8 @@ LowPassFilter::LowPassFilter(uint32_t sample_rate)
     twopi_ovr_srate = (2 * M_PI) / sample_rate;
 }
 
-audio_sample_t LowPassFilter::process_sample(
-    float sample, 
+audio_sample_t LowPassFilter::get_sample(
+    audio_sample_t input, 
     frequency_t arg_cutoff, 
     control_sample_t arg_qfactor
 )
@@ -32,7 +32,7 @@ audio_sample_t LowPassFilter::process_sample(
         qfactor = arg_qfactor;
         calculate_coeffs();
     }
-    audio_sample_t output = (a0 * sample)\
+    audio_sample_t output = (a0 * input)\
                     + (a1 * ff_z1)\
                     + (a2 * ff_z2)\
                     - (b1 * fb_z1)\
@@ -40,7 +40,7 @@ audio_sample_t LowPassFilter::process_sample(
 
     ff_z2 = ff_z1;
     fb_z2 = fb_z1;
-    ff_z1 = sample;
+    ff_z1 = input;
     fb_z1 = output;
     return output;
 }

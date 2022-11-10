@@ -64,7 +64,7 @@ public:
      * @param resonance 
      * @return audio_sample_t sample 
      */
-    audio_sample_t process_sample(
+    audio_sample_t get_sample(
         audio_sample_t sample, 
         frequency_t cutoff, 
         control_sample_t resonance

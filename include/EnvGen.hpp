@@ -67,9 +67,9 @@ public:
      * @param decay 
      * @param sustain 
      * @param release 
-     * @return control_sample_t - sample 
+     * @return control_sample_t sample 
      */
-    control_sample_t advance(
+    control_sample_t get_sample(
         delta_time_t attack,
         delta_time_t decay,
         delta_time_t sustain,

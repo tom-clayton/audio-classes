@@ -20,7 +20,8 @@
  */
 BandLimitedOsc::BandLimitedOsc(uint32_t arg_sample_rate)
     :sample_rate(arg_sample_rate), 
-     table_position(0)
+     table_position(0),
+     cents(0)
 {
     create_wavetable();
     size_ovr_srate = TABLE_SIZE / (float)sample_rate;
@@ -33,10 +34,6 @@ BandLimitedOsc::BandLimitedOsc(uint32_t arg_sample_rate)
     sine = new Sine(wavetable, TABLE_SIZE);  
 }
 
-/**
- * @brief Free waveform objects
- * 
- */
 BandLimitedOsc::~BandLimitedOsc()
 {
     delete triangle;
@@ -45,10 +42,6 @@ BandLimitedOsc::~BandLimitedOsc()
     delete sine;
 }
 
-/**
- * @brief Create the sinewave wave table
- * 
- */
 void BandLimitedOsc::create_wavetable()
 {
     float phase_incr = M_PI * 2 / TABLE_SIZE;
@@ -57,53 +50,38 @@ void BandLimitedOsc::create_wavetable()
     }
 }
 
-/**
- * @brief Update step size, advance and wrap the table postition
- * 
- * @param frequency 
- */
-void BandLimitedOsc::advance(frequency_t frequency)
+void BandLimitedOsc::advance(floating_point_t frequency)
 {
     step_size = (table_step_t)(size_ovr_srate * frequency);
     table_position += step_size;
     table_position %= TABLE_SIZE;
 }
 
-/**
- * @brief Acquire the next sample from the triangle waveform object
- * 
- * @return audio_sample_t sample 
- */
+void BandLimitedOsc::advance(uint8_t midi_number, int8_t detune)
+{
+    uint16_t new_cents = midi_number * 100 + detune;
+    if (new_cents != cents){
+        floating_point_t new_frequency = TUNING_A4 * pow(2, (new_cents-6900)/1200);
+        advance(new_frequency);
+        cents = new_cents;
+    }
+}
+
 audio_sample_t BandLimitedOsc::triangle_sample()
 {
     return triangle->calculate_sample(table_position, step_size);
 }
 
-/**
- * @brief Acquire the next sample from the sawtooth waveform object
- * 
- * @return audio_sample_t sample 
- */
 audio_sample_t BandLimitedOsc::sawtooth_sample()
 {
     return sawtooth->calculate_sample(table_position, step_size);
 }
 
-/**
- * @brief Acquire the next sample from the square waveform object
- * 
- * @return audio_sample_t sample 
- */
 audio_sample_t BandLimitedOsc::square_sample()
 {
     return square->calculate_sample(table_position, step_size);
 }
 
-/**
- * @brief Acquire the next sample from the sine waveform object
- * 
- * @return audio_sample_t sample 
- */
 audio_sample_t BandLimitedOsc::sine_sample()
 {
     return sine->calculate_sample(table_position, step_size);

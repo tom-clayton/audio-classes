@@ -17,7 +17,6 @@
 #ifdef USE_DOUBLES
 typedef double audio_sample_t;
 typedef double control_sample_t;
-typedef double frequency_t;
 typedef double delta_time_t;
 typedef double filter_coef_t;
 typedef double floating_point_t;
@@ -25,7 +24,6 @@ typedef double floating_point_t;
 #else
 typedef float audio_sample_t;
 typedef float control_sample_t;
-typedef float frequency_t;
 typedef float delta_time_t;
 typedef float filter_coef_t;
 typedef float floating_point_t;

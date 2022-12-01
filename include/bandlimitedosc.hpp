@@ -23,6 +23,7 @@
 #define TABLE_SIZE      65536
 #define MAX_FREQ        1662.0f    // includes octave 6
 #define DEFAULT_FREQ    440.0f
+#define TUNING_A4       440.0f
 
 /**
  * @brief Band Limited Oscillator
@@ -34,9 +35,10 @@ private:
     uint32_t sample_rate;
     table_step_t step_size;
     table_step_t table_position;
+    uint16_t cents;
 
     audio_sample_t wavetable[TABLE_SIZE];
-    audio_sample_t size_ovr_srate;
+    floating_point_t size_ovr_srate;
 
     Triangle *triangle;
     Sawtooth *sawtooth;
@@ -64,13 +66,22 @@ public:
     ~BandLimitedOsc();
 
     /**
-     * @brief Advance through wavetable  
+     * @brief Advance through wavetable, using frequency in hertz 
      * 
      * Update step size, advance and wrap the table postition 
      * 
      * @param frequency 
      */
-    void advance(frequency_t frequency);
+    void advance(floating_point_t frequency);
+
+    /**
+     * @brief Calculate frequency from note midi-number and 
+     *        amount to detune. Advance through wavetable
+     * 
+     * @param midi_number midi-number of note
+     * @param detune detune in cents, from -50 to +50
+     */
+    void advance(uint8_t midi_number, int8_t detune);
 
     /**
      * @brief Calculate next triangle sample 
